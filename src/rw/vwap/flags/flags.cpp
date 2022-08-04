@@ -5,7 +5,10 @@
 #include <absl/flags/flag.h>
 
 ABSL_FLAG(  //
-    double, quantity, 1.0, "vwap quantity");
+    double,
+    quantity,
+    1.0,
+    "vwap quantity");
 
 namespace rw {
 namespace vwap {

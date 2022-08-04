@@ -12,9 +12,9 @@ namespace vwap {
 // Service is a base class used to initialize the environment
 // it is not required, only for your convenience
 
-class Application final : public Tool {
+class Application final : public roq::Tool {
  public:
-  using Tool::Tool;
+  using roq::Tool::Tool;
 
  protected:
   int main_helper(std::span<std::string_view> const &args);
