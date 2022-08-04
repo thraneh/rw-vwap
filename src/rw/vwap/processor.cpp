@@ -31,7 +31,7 @@ void Processor::operator()(roq::Event<roq::MarketByPriceUpdate> const &event) {
   auto quantity_decimals = market_by_price_update.quantity_decimals;
   fmt::print(
       "{},{},{},{},{},{}\n"sv,
-      message_info.receive_time,
+      message_info.receive_time_utc,
       market_by_price_update.symbol,
       roq::utils::Number{layer.bid_price, price_decimals},
       roq::utils::Number{layer.bid_quantity, quantity_decimals},
