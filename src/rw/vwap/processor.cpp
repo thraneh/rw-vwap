@@ -6,6 +6,8 @@
 
 #include "roq/client.hpp"
 #include "roq/logging.hpp"
+#include "roq/utils/number.hpp"
+
 #include "rw/vwap/flags/flags.hpp"
 
 using namespace std::chrono_literals;
@@ -25,14 +27,16 @@ void Processor::operator()(roq::Event<roq::MarketByPriceUpdate> const &event) {
   auto &market_by_price = get_market_by_price(market_by_price_update);
   market_by_price(market_by_price_update);
   auto layer = market_by_price.compute_vwap(flags::Flags::quantity());
+  auto price_decimals = market_by_price_update.price_decimals;
+  auto quantity_decimals = market_by_price_update.quantity_decimals;
   fmt::print(
       "{},{},{},{},{},{}\n"sv,
       message_info.receive_time,
       market_by_price_update.symbol,
-      layer.bid_price,
-      layer.bid_quantity,
-      layer.ask_price,
-      layer.ask_quantity);
+      roq::utils::Number{layer.bid_price, price_decimals},
+      roq::utils::Number{layer.bid_quantity, quantity_decimals},
+      roq::utils::Number{layer.ask_price, price_decimals},
+      roq::utils::Number{layer.ask_quantity, quantity_decimals});
 }
 
 template <typename T>
