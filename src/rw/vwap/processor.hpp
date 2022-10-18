@@ -43,7 +43,7 @@ struct Processor final : public roq::client::EventLogReader::Handler {
   void operator()(roq::Event<roq::ParameterUpdate> const &) override {}
 
   template <typename T>
-  roq::cache::MarketByPrice &get_market_by_price(const T &);
+  roq::cache::MarketByPrice &get_market_by_price(T const &);
 
  private:
   absl::node_hash_map<roq::Symbol, std::unique_ptr<roq::cache::MarketByPrice>> market_by_price_;
