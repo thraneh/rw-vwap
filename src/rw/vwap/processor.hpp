@@ -40,7 +40,7 @@ struct Processor final : public roq::client::EventLogReader::Handler {
   void operator()(roq::Event<roq::PositionUpdate> const &) override {}
   void operator()(roq::Event<roq::FundsUpdate> const &) override {}
   void operator()(roq::Event<roq::CustomMetricsUpdate> const &) override {}
-  void operator()(roq::Event<roq::ParameterUpdate> const &) override {}
+  void operator()(roq::Event<roq::ParametersUpdate> const &) override {}
 
   template <typename T>
   roq::cache::MarketByPrice &get_market_by_price(T const &);
